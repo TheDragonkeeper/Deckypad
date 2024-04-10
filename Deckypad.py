@@ -80,7 +80,7 @@ def main():
 
     network_pressed = False
     Net = None
-    IPInputBox = Textinputs.Textbox(250, 430, 50, 50, 50, predefined_text="192.168.1.203")
+    IPInputBox = Textinputs.Textbox(250, 430, 50, 50, 50, predefined_text="192.168.1.x")
     IPlabel = Textinputs.Textlabel(200,440, "IP: ", 50, (0,0,0))
     PortInputBox = Textinputs.Textbox(850, 430, 50,50, 50, predefined_text="666")
     Portlabel = Textinputs.Textlabel(770,440, "Port: ", 50, (0,0,0))
