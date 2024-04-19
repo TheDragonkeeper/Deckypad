@@ -1,20 +1,44 @@
 # Deckypad
-Primarily made for use with the Steam Deck to allow its gamepad to be used on another PC remotely over wifi/bluetooth
-but can be used on other PCs as well. This needs to be running on both machines.
+Primarily made for use with the Steam Deck to allow its gamepad to be used on another PC remotely over a network.
+You can use any network interface, be it Wifi/Ethernet/Bluetooth  but if you use bluetooth it much be setup to have a IP address.
 
+This can be used on other PCs as well, they just need to have the requirement installed:
+
+### Decky-client.py is used for the client side (deck):
 pip requirements:
--  vgamepad - install on host only
--  pygame - install on host and client
+- pygame
 
-Usage:
-- run Deckypad.py in your preferred python enviroment
-- Select WIFI
-- Assign a port and select Host on the gaming device
-- Assign IP for gaming device, use the same port and select Client on the client device
+### Decky-host.py is used for the server side (windows/linux):
+pip requirements:
+-  vgamepad
+  
+# Usage:
+### Client
+#### method 1
+- run Decky-client.py in your preferred python enviroment that has the requirement
+- Insert your Hosts IP and Port into the input boxes
+- click Connect
+#### method 2
+- run Decky-client.py in your preferred python enviroment that has the requirement
+- assign an argument to the script,  Deckypad-client.py <Host IP>:<Port Number>
+  this can also be achieved in gamemode,
+- example:
+  ```
+  python  Deckypad-client.py 192.168.1.100:9090
+  ```
+### Host
+#### method 1
+- just run the script as
+```
+python Deckypad-host.py
+```
+- this runs on all interfaces and port 9090
+#### method 2
+- assign an interface and port using script arguments
+```
+python Deckypad-host.py <Port Number> <Host interface IP>
+```
 
-Works with steam input the best on steam deck for the built in controller but can work for other devices attached.
-
-its locked to 90fps but the steam deck can limit this lower if needed. The more fps the lower the input latancy but also the higher network traffic. I found that 90 was smooth, 60 was good enough, 30 can start getting some noticable delays.
 
 # What works:
 - Network connection: client to server
