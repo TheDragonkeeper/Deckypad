@@ -132,12 +132,12 @@ def output_joy_data(text_print, screen, joysticks):
         text_print.unindent()
 
 
-def connection_screen_setup():
+def connection_screen_setup(_IP, _PORT):
     ClientNetworkButton_image = pygame.image.load("images/ClientNetworkButton.png").convert_alpha()
     ClientNetworkButton = Buttons.Button(640,200, ClientNetworkButton_image, 1, False)
-    IPInputBox = Textinputs.Textbox(250, 430, 50, 50, 50, predefined_text="192.168.1.203")
+    IPInputBox = Textinputs.Textbox(250, 430, 50, 50, 50, predefined_text=_IP)
     IPlabel = Textinputs.Textlabel(200,440, "IP: ", 50, (0,0,0))
-    PortInputBox = Textinputs.Textbox(850, 430, 50,50, 50, predefined_text="9090")
+    PortInputBox = Textinputs.Textbox(850, 430, 50,50, 50, predefined_text=_PORT)
     Portlabel = Textinputs.Textlabel(770,440, "Port: ", 50, (0,0,0))
     IPInputBox.visible = True
     PortInputBox.visible = True

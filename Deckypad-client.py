@@ -39,7 +39,7 @@ def main(_manual):
     signal.signal(signal.SIGINT, signal_handler)
     ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = None,None,None,None,None
     Quit_button = gui.setup_quit()
-    if _manual == 0: ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup()
+    if _manual == 0: ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
     while True:
         try:
             for event in pygame.event.get():
@@ -58,7 +58,7 @@ def main(_manual):
             _manual = 0
             Net.mode = -1
             Net.connected = False
-            ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup()
+            ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
         pygame.display.flip()
         clock.tick(fps)
 
