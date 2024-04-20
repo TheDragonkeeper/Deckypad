@@ -45,6 +45,7 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 - Network connection: client to server
 - Gamepad detection and hotplugging
 - Xbox360 Gamepad Emulation
+- Mouse movement
 
 # TODO:
 - Make a Virtual Playstation controller
@@ -52,5 +53,3 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 - Finish the players section so multiple controllers can be used on the same PC without interference
 - Add option to blackout screen
 - Add Keyboard inputs
-- Add mouse inputs
-- Add touchscreen inputs
