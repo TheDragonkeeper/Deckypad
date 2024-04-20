@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 import sys, os, re, time
 sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/class/")
@@ -53,8 +53,10 @@ def main(_manual):
                     gui.manual_mode_inputs(event, IPInputBox, PortInputBox)
                 else:
                     gui.get_jot_data(Net, event)
+                    gui.get_mouse_events(Net, event)
                     gui.output_joy_data(text_print, screen, joysticks)
-        except:
+        except Exception as ex:
+            print(ex)
             _manual = 0
             Net.mode = -1
             Net.connected = False
@@ -87,6 +89,7 @@ if __name__ == "__main__":
             Net.HOST = host[0]
         if not good:
             _help()
+        Net.start_client(str(Net.HOST), int(Net.PORT))
         main(1)
     else:
         main(0)

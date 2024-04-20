@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import sys, os, re, time
 sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/class/")
 
