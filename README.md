@@ -11,6 +11,7 @@ pip requirements:
 ### Decky-host.py is used for the server side (windows/linux):
 pip requirements:
 -  vgamepad
+-  mouse
   
 # Usage:
 ### Client
