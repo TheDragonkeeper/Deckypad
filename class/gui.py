@@ -197,7 +197,6 @@ def get_mouse_events(Net, event):
         Net.sent_joy_data("M:B:"+str(event.button)+":1|")
 
 def get_keyboard_events(Net, event):
-    print(event)
     if event.type == pygame.KEYDOWN:
         if str(event.unicode) == '':
             pass

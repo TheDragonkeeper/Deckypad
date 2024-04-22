@@ -67,7 +67,6 @@ class Gamepad():
                             self.ButtonMap[str(action[1])](player,0)
                 elif len(action) == 3:
                     if str(action[0]) == "K":
-                        print(action[1]+" -- "+action[2])
                         if action[2] == "1":
                             keyboard.write(str(action[1]).upper())
                         else:
