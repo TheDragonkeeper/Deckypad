@@ -1,6 +1,5 @@
 import pygame, re
 import Buttons, Textinputs
-
 ################################
 ButtonMap = {
     "0": "JA",
@@ -177,6 +176,7 @@ def manual_mode_inputs(event, IPInputBox, PortInputBox):
 def setup_quit():
     Quit_button_image = pygame.image.load("images/QuitButton.png").convert_alpha()
     Quit_button = Buttons.Button((1280/2)-150,650, Quit_button_image, 0.5, True)
+    Quit_button.visible = True
     return Quit_button
 
 def draw_quit(screen,Net,Quit_button):
@@ -189,10 +189,21 @@ def draw_quit(screen,Net,Quit_button):
     return False
 
 def get_mouse_events(Net, event):
-    print(event)
     if event.type == pygame.MOUSEMOTION:
         Net.sent_joy_data("M:M:"+str(event.pos[0])+":"+str(event.pos[1])+"|")
     if event.type == pygame.MOUSEBUTTONUP:
         Net.sent_joy_data("M:B:"+str(event.button)+":0|")
     if event.type == pygame.MOUSEBUTTONDOWN:
         Net.sent_joy_data("M:B:"+str(event.button)+":1|")
+
+def get_keyboard_events(Net, event):
+    print(event)
+    if event.type == pygame.KEYDOWN:
+        if str(event.unicode) == '':
+            pass
+        elif str(event.unicode) == '\r':
+            Net.sent_joy_data("K:ENTER:"+str(event.mod)+"|")
+        else:
+            Net.sent_joy_data("K:"+str(event.unicode)+":"+str(event.mod)+"|")
+    # elif event.type == pygame.KEYUP:
+    #     Net.sent_joy_data("K:"+str(event.unicode)+":0|")

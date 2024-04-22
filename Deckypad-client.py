@@ -52,8 +52,9 @@ def main(_manual):
                         _manual = 1
                     gui.manual_mode_inputs(event, IPInputBox, PortInputBox)
                 else:
-                    gui.get_jot_data(Net, event)
-                    gui.get_mouse_events(Net, event)
+                    #gui.get_jot_data(Net, event)
+                    #gui.get_mouse_events(Net, event)
+                    gui.get_keyboard_events(Net, event)
                     gui.output_joy_data(text_print, screen, joysticks)
         except Exception as ex:
             print(ex)

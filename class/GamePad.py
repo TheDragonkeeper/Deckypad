@@ -1,6 +1,7 @@
 import vgamepad as vg
 import time
 import mouse
+import keyboard
 
 class Gamepad():
     def __init__(self):
@@ -65,13 +66,19 @@ class Gamepad():
                         if str(action[1]) in self.ButtonMap:
                             self.ButtonMap[str(action[1])](player,0)
                 elif len(action) == 3:
-                    if str(action[0]) == "A":
+                    if str(action[0]) == "K":
+                        print(action[1]+" -- "+action[2])
+                        if action[2] == "1":
+                            keyboard.write(str(action[1]).upper())
+                        else:
+                            keyboard.write(action[1])
+                    elif str(action[0]) == "A":
                         if str(action[1]) in self.ButtonMap:
                             values = str(action[2]).split(",")
                             if len(values) == 2:
                                 if values[0] != "" and values[1] != "" and values[0] != "-" and values[1] != "-" and values[0] != "0." and values[1] != "0.":
                                     self.ButtonMap[str(action[1])](player,[float(values[0]),float(values[1])])
-                    if str(action[0]) == "T":
+                    elif str(action[0]) == "T":
                         if str(action[1]) in self.ButtonMap:
                             if str(action[2]) != "-" and str(action[2]) != "" and str(action[2]) != "0.":
                                 self.ButtonMap[str(action[1])](player,float(action[2]))
