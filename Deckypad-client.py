@@ -41,39 +41,40 @@ def main(_manual):
     Quit_button = gui.setup_quit()
     if _manual == 0: ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
     while True:
-        try:
-            for event in pygame.event.get():
-                screen.fill((202,228,241))
-                joysticks = gui.joystick_instances(joysticks, event)
-                if gui.draw_quit(screen, Net, Quit_button):
-                    return
-                if _manual == 0:
-                    if gui.connection_screen_draw(screen,Net,ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel, port_regex, ip_regex):
-                        _manual = 1
-                    gui.manual_mode_inputs(event, IPInputBox, PortInputBox)
-                else:
-                    #gui.get_jot_data(Net, event)
-                    #gui.get_mouse_events(Net, event)
-                    gui.get_keyboard_events(Net, event)
-                    gui.output_joy_data(text_print, screen, joysticks)
-        except Exception as ex:
-            print(ex)
-            _manual = 0
-            Net.mode = -1
-            Net.connected = False
-            ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
+        # try:
+        for event in pygame.event.get():
+            screen.fill((202,228,241))
+            joysticks = gui.joystick_instances(joysticks, event)
+            if gui.draw_quit(screen, Net, Quit_button):
+                return
+            if _manual == 0:
+                if gui.connection_screen_draw(screen,Net,ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel, port_regex, ip_regex):
+                    _manual = 1
+                gui.manual_mode_inputs(event, IPInputBox, PortInputBox)
+            else:
+                gui.get_jot_data(Net, event)
+                gui.get_mouse_events(Net, event)
+                gui.get_keyboard_events(Net, event)
+                gui.output_joy_data(text_print, screen, joysticks)
+        # except Exception as ex:
+        #     print(ex)
+        #     _manual = 0
+        #     Net.mode = -1
+        #     Net.connected = False
+        #     ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
+        #     Quit_button.visible = True
         pygame.display.flip()
         clock.tick(fps)
 
 if __name__ == "__main__":
     help = ["-h", "-?", "/?", "/h", "--help", "-help", "help"]
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 3:
         _help()
     else:
         for x in sys.argv:
             if x in help:
                 _help()
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
         good = True
         if not ":" in sys.argv[1]:
             _help()
@@ -90,7 +91,15 @@ if __name__ == "__main__":
             Net.HOST = host[0]
         if not good:
             _help()
-        Net.start_client(str(Net.HOST), int(Net.PORT))
+        if len(sys.argv) == 2:
+            Net.start_client(str(Net.HOST), int(Net.PORT))
+        else:
+            controlelrs_valid = ["xbox", "ds4"]
+            if sys.argv[2] in controlelrs_valid:
+                Net.start_client(str(Net.HOST), int(Net.PORT), controller=sys.argv[2])
+            else:
+                print("\nInvalid controller selection\n- you can select from : \n"+str(controlelrs_valid)+"\n Defaults to 'xbox'")
+                os._exit(0)
         main(1)
     else:
         main(0)

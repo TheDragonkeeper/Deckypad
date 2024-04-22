@@ -14,6 +14,7 @@ class Manage():
         self.clients = {}
         self.mode = -1
         self.queue = queue.Queue()
+        self.controller = "xbox"
 
 
     def kill_thread(self):
@@ -58,19 +59,25 @@ class Manage():
                 "port": client_address[1]
             }
         while self.thread_sig:
+            if not "controller" in self.clients[client_name]:
+                client_socket.send("CONTROLLER".encode("utf-8"))
             request = client_socket.recv(1024)
             request = request.decode("utf-8")
             if request.lower() == "close":
-                self.gamepad.killpad("0")
+                self.gamepad.killpad(client_name)
                 client_socket.send("closed".encode("utf-8"))
                 break
 
-            self.gamepad.handle_reciecved("0", request)
-
-            response = "accepted".encode("utf-8")
-            client_socket.send(response)
+            if "controller" in self.clients[client_name]:
+                self.gamepad.handle_reciecved(client_name, request)
+            elif request.lower() == "xbox":
+                self.gamepad.init_pad(client_name, "xbox")
+                self.clients[client_name]["controller"] = "xbox"
+            elif request.lower() == "ds4":
+                self.gamepad.init_pad(client_name, "ds4")
+                self.clients[client_name]["controller"] = "ds4"
         try:
-            self.gamepad.killpad("0")
+            self.gamepad.killpad(client_name)
         except: pass
         client_socket.close()
         print("Connection to client closed")
@@ -79,10 +86,12 @@ class Manage():
     ######################################################
     ################ Client Section ######################
 
-    def start_client(self, ip, port):
+    def start_client(self, ip, port, controller="xbox"):
+        print("you choose "+controller)
         self.connected = None
         self.HOST = ip
         self.PORT = port
+        self.controller = controller
         self.thread = threading.Thread(target=self.client)
         self.thread.start()
         while self.connected == None:
@@ -101,6 +110,8 @@ class Manage():
 
             if response.lower() == "closed":
                 break
+            elif response.lower() == "controller":
+                self.send_message(self.controller)
         self.sock.close()
         self.mode = -1
         print("Connection to server closed")

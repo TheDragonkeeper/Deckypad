@@ -44,11 +44,9 @@ def setup_screen():
 
 def joystick_instances(joysticks, event):
     if event.type == pygame.JOYDEVICEADDED:
-        print(event)
         joy = pygame.joystick.Joystick(event.device_index)
         joysticks[joy.get_instance_id()] = joy
         print(f"Joystick {joy.get_instance_id()} connencted")
-
     if event.type == pygame.JOYDEVICEREMOVED:
         del joysticks[event.instance_id]
         print(f"Joystick {event.instance_id} disconnected")
@@ -59,10 +57,7 @@ def get_jot_data(Net, event):
         Net.sent_joy_data("close")
     if event.type == pygame.JOYBUTTONDOWN:
         Net.sent_joy_data("D:"+ButtonMap[str(event.button)]+"|")
-    elif event.type == pygame.KEYDOWN:
-        Net.sent_joy_data("K:"+ButtonMap[str(event.key)]+"|")
-
-    elif event.type == pygame.JOYBUTTONUP  or event.type == pygame.KEYUP:
+    elif event.type == pygame.JOYBUTTONUP:
         Net.sent_joy_data("R:"+ButtonMap[str(event.button)]+"|")
     elif event.type == pygame.JOYHATMOTION:
         Net.sent_joy_data("H:"+str(event.hat)+":"+str(event.value[0])+","+str(event.value[1])+"|")
@@ -204,5 +199,3 @@ def get_keyboard_events(Net, event):
             Net.sent_joy_data("K:ENTER:"+str(event.mod)+"|")
         else:
             Net.sent_joy_data("K:"+str(event.unicode)+":"+str(event.mod)+"|")
-    # elif event.type == pygame.KEYUP:
-    #     Net.sent_joy_data("K:"+str(event.unicode)+":0|")
