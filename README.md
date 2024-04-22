@@ -56,10 +56,10 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 - Keyboard Emulation (currently only standard keys and shift modifier)
 - Playstation DS4 Gamepad Emulation
 - Multiple Clients can connect to have different controllers usable for multiplayer games.
+- Blackout screen
 
 # TODO:
 - Create Bluetooth setup and network
-- Add option to blackout screen
 
 # Known issues
 - Mouse Emulation doesnt work in all games, Sometimes the window captures the mouse preventing it other programs from moving it.
