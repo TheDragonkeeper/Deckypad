@@ -59,3 +59,6 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 # TODO:
 - Create Bluetooth setup and network
 - Add option to blackout screen
+
+# Known issues
+- Mouse Emulation doesnt work in all games, Sometimes the window captures the mouse preventing it other programs from moving it.
