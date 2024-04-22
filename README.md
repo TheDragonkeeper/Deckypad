@@ -1,8 +1,8 @@
 # Deckypad
 Primarily made for use with the Steam Deck to allow its gamepad to be used on another PC remotely over a network.
-You can use any network interface, be it Wifi/Ethernet/Bluetooth  but if you use bluetooth it much be setup to have a IP address.
+You can use any network interface, be it Wifi/Ethernet/Bluetooth  but if you use bluetooth it must be setup to have a IP address.
 
-This can be used on other PCs as well, they just need to have the requirement installed:
+You need to have the requirement installed in the python enviroment:
 
 ### Decky-client.py is used for the client side (deck):
 pip requirements:
@@ -34,6 +34,7 @@ pip requirements:
   ```
   
 ### Host
+##### Linux  may need sudo privileges in some cases.
 #### method 1
 - just run the script as
 ```
