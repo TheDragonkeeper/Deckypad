@@ -170,9 +170,25 @@ def manual_mode_inputs(event, IPInputBox, PortInputBox):
 
 def setup_quit():
     Quit_button_image = pygame.image.load("images/QuitButton.png").convert_alpha()
-    Quit_button = Buttons.Button((1280/2)-150,650, Quit_button_image, 0.5, True)
+    Quit_button = Buttons.Button(850,650, Quit_button_image, 0.5, True)
     Quit_button.visible = True
     return Quit_button
+
+def setup_blackout():
+    Blackout_button_image = pygame.image.load("images/Blackout.png").convert_alpha()
+    Blackout_button = Buttons.Button(850,550, Blackout_button_image, 0.5, False)
+    Blackout_button.visible = True
+    return Blackout_button
+
+def draw_blackout(screen,Blackout_button):
+    if Blackout_button.draw(screen):
+        return True
+    return False
+
+def setup_bg():
+    bg = pygame.image.load("images/BG.png").convert_alpha()
+    rect = bg.get_rect()
+    return [bg, rect]
 
 def draw_quit(screen,Net,Quit_button):
     if Quit_button.draw(screen):
@@ -199,3 +215,8 @@ def get_keyboard_events(Net, event):
             Net.sent_joy_data("K:ENTER:"+str(event.mod)+"|")
         else:
             Net.sent_joy_data("K:"+str(event.unicode)+":"+str(event.mod)+"|")
+
+def look_for_screen_tap(event):
+    if event.type == pygame.FINGERDOWN:
+        return True
+    return False

@@ -39,14 +39,29 @@ def main(_manual):
     signal.signal(signal.SIGINT, signal_handler)
     ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = None,None,None,None,None
     Quit_button = gui.setup_quit()
+    Blackout_button = gui.setup_blackout()
+    _bg = gui.setup_bg()
+    blackout = False
     if _manual == 0: ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel = gui.connection_screen_setup(str(Net.HOST),str(Net.PORT))
     while True:
         try:
             for event in pygame.event.get():
-                screen.fill((202,228,241))
+                if not blackout: screen.blit(_bg[0],_bg[1])
+                else:
+                    screen.fill((0,0,0))
+                    if gui.look_for_screen_tap(event):
+                        blackout = False
+                        Quit_button.visible = True
+                        Blackout_button.visible = True
+                        break
                 joysticks = gui.joystick_instances(joysticks, event)
                 if gui.draw_quit(screen, Net, Quit_button):
                     return
+                if gui.draw_blackout(screen,Blackout_button):
+                    blackout = True
+                    Quit_button.visible = False
+                    Blackout_button.visible = False
+                    break
                 if _manual == 0:
                     if gui.connection_screen_draw(screen,Net,ClientNetworkButton,IPInputBox,IPlabel,PortInputBox,Portlabel, port_regex, ip_regex):
                         _manual = 1
