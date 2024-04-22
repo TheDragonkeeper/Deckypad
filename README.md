@@ -12,6 +12,7 @@ pip requirements:
 pip requirements:
 -  vgamepad
 -  mouse
+-  keyboard
   
 # Usage:
 ### Client
@@ -46,10 +47,10 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 - Gamepad detection and hotplugging
 - Xbox360 Gamepad Emulation
 - Mouse Emulation
+- Keyboard Emulation
 
 # TODO:
 - Make a Virtual Playstation controller
 - Create Bluetooth setup and network
 - Finish the players section so multiple controllers can be used on the same PC without interference
 - Add option to blackout screen
-- Add Keyboard inputs
