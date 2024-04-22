@@ -16,7 +16,7 @@ pip requirements:
   
 # Usage:
 ### Client
-#### method 1
+#### method 1 (xbox controller emulation only atm)
 - run Decky-client.py in your preferred python enviroment that has the requirement
 - Insert your Hosts IP and Port into the input boxes
 - click Connect
@@ -24,10 +24,15 @@ pip requirements:
 - run Decky-client.py in your preferred python enviroment that has the requirement
 - assign an argument to the script,  Deckypad-client.py <Host IP>:<Port Number>
   this can also be achieved in gamemode,
-- example:
+- example 1:
   ```
   python  Deckypad-client.py 192.168.1.100:9090
   ```
+- example 2 you can also specify which controller you would like to use (for ds4 controller emulation):
+  ```
+  python  Deckypad-client.py 192.168.1.100:9090 ds4
+  ```
+  
 ### Host
 #### method 1
 - just run the script as
@@ -47,10 +52,10 @@ python Deckypad-host.py <Port Number> <Host interface IP>
 - Gamepad detection and hotplugging
 - Xbox360 Gamepad Emulation
 - Mouse Emulation
-- Keyboard Emulation
+- Keyboard Emulation (currently only standard keys and shift modifier)
+- Playstation DS4 Gamepad Emulation
+- Multiple Clients can connect to have different controllers usable for multiplayer games.
 
 # TODO:
-- Make a Virtual Playstation controller
 - Create Bluetooth setup and network
-- Finish the players section so multiple controllers can be used on the same PC without interference
 - Add option to blackout screen
